@@ -24,4 +24,22 @@ class ComputerTest extends \PHPUnit_Framework_TestCase
         $program = Program::singleStatement('PRINT "Hello, World!"');
         $this->assertEquals(new Output("Hello, World!\n"), $this->computer->execute($program));
     }
+
+    public function testTwoOrMoreStatementsAreExecutedOneAfterTheOther()
+    {
+        $this->markTestIncomplete();
+        $program = Program::multipleStatements(
+            'PRINT "Hi"', 
+            'PRINT "There"',
+            'PRINT "!"'
+        );
+        $this->assertEquals(
+            Output::multipleLines(
+                "Hi",
+                "There",
+                "!"
+            ),
+            $this->computer->execute($program)
+        );
+    }
 }

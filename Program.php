@@ -2,11 +2,11 @@
 
 class Program
 {
-    private $statement;
+    private $statements;
 
-    private function __construct($statement)
+    private function __construct($statements)
     {
-        $this->statement = $statement;
+        $this->statements = $statements;
     }
 
     public static function singleStatement($statement)
@@ -14,13 +14,27 @@ class Program
         if (!($statement instanceof Statement)) {
             $statement = new Statement($statement);
         }
-        return new self($statement);
+        return new self(array($statement));
+    }
+
+    public static function multipleStatements(/*$statement, $statement, ...*/)
+    {
+        $statements = func_get_args();
+        $statements = array($statements[0]);
+        foreach ($statements as $statement) {
+            if (!($statement instanceof Statement)) {
+                $statement = new Statement($statement);
+            }
+        }
+        return new self(array($statement));
     }
 
     public function execute(Command $command)
     {
-        if ($command->match($this->statement)) {
-            return $command->execute($this->statement);
+        foreach ($this->statements as $statement) {
+            if ($command->match($statement)) {
+                return $command->execute($statement);
+            }
         }
     }
 }
