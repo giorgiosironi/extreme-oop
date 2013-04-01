@@ -6,14 +6,12 @@ class Output
 
     public static function multipleLines(/*$line, $line, ...*/)
     {
+        $addLineFeed = function($line) {
+            return $line . "\n";
+        };
         return new self(implode(
             "",
-            array_map(
-                function($line) {
-                    return $line . "\n";
-                },
-                func_get_args()
-            )
+            array_map($addLineFeed, func_get_args())
         ));
     }
 

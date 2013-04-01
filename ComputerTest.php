@@ -33,11 +33,7 @@ class ComputerTest extends \PHPUnit_Framework_TestCase
             'PRINT "!"'
         );
         $this->assertEquals(
-            Output::multipleLines(
-                "Hi",
-                "There",
-                "!"
-            ),
+            Output::multipleLines("Hi", "There", "!"),
             $this->computer->execute($program)
         );
     }
