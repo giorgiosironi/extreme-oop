@@ -27,7 +27,6 @@ class ComputerTest extends \PHPUnit_Framework_TestCase
 
     public function testTwoOrMoreStatementsAreExecutedOneAfterTheOther()
     {
-        $this->markTestIncomplete();
         $program = Program::multipleStatements(
             'PRINT "Hi"', 
             'PRINT "There"',
