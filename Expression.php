@@ -11,4 +11,12 @@ class Expression
     {
         return $this->text;
     }
+
+    /**
+     * @return bool
+     */
+    public function isVariable()
+    {
+        return (bool) preg_match('/^[A-Z]{1,1}$/', $this->text);
+    }
 }
