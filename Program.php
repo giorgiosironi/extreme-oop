@@ -11,22 +11,17 @@ class Program
 
     public static function singleStatement($statement)
     {
-        if (!($statement instanceof Statement)) {
-            $statement = new Statement($statement);
-        }
-        return new self(array($statement));
+        return new self(array(Statement::wrap($statement)));
     }
 
     public static function multipleStatements(/*$statement, $statement, ...*/)
     {
         $statements = func_get_args();
-        $statements = array($statements[0]);
+        $wrapped = array();
         foreach ($statements as $statement) {
-            if (!($statement instanceof Statement)) {
-                $statement = new Statement($statement);
-            }
+            $wrapped[] = Statement::wrap($statement);
         }
-        return new self(array($statement));
+        return new self($wrapped);
     }
 
     public function execute(Command $command)
