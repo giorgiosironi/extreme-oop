@@ -9,9 +9,6 @@ class Computer
 
     public function execute(Program $program)
     {
-        if ($output = $program->execute($this->command)) {
-            return $output;
-        }
-        return new Output('');
+        return $program->execute($this->command);
     } 
 }
