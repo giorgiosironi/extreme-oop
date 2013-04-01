@@ -1,33 +1,33 @@
 <?php
 class PrintCommandTest extends PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        $this->command = new PrintCommand();
+    }
+
     public function testDoesNotMatchFooStatements()
     {
-        $command = new PrintCommand();
-        $this->assertFalse($command->match(new Statement('FOO')));
+        $this->assertFalse($this->command->match(new Statement('FOO')));
     }
 
     public function testMatchesEmptyPrintStatements()
     {
-        $command = new PrintCommand();
-        $this->assertTrue($command->match(new Statement('PRINT')));
+        $this->assertTrue($this->command->match(new Statement('PRINT')));
     }
 
     public function testMatchesPrintStatementsWithArguments()
     {
-        $command = new PrintCommand();
-        $this->assertTrue($command->match(new Statement('PRINT "Hello"')));
+        $this->assertTrue($this->command->match(new Statement('PRINT "Hello"')));
     }
 
     public function testExecutesEmptyPrintStatement()
     {
-        $command = new PrintCommand();
-        $this->assertEquals(new Output("\n"), $command->execute(new Statement('PRINT')));
+        $this->assertEquals(new Output("\n"), $this->command->execute(new Statement('PRINT')));
     }
 
     public function testExecutesPrintStatementsWithArguments()
     {
-        $command = new PrintCommand();
-        $this->assertEquals(new Output("Hello\n"), $command->execute(new Statement('PRINT "Hello"')));
+        $this->assertEquals(new Output("Hello\n"), $this->command->execute(new Statement('PRINT "Hello"')));
     }
 }
