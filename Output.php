@@ -10,8 +10,16 @@ class Output
         return new self(implode("\n", func_get_args()) . "\n");
     }
 
-    public function __construct($value)
+    public function __construct($value = '')
     {
         $this->value = $value;
+    }
+
+    /**
+     * TODO: $other?
+     */
+    public function append(Output $other)
+    {
+        return new self($this->value . $other->value);
     }
 }

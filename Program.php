@@ -26,9 +26,11 @@ class Program
 
     public function execute(Command $command)
     {
+        $output = new Output();
         foreach ($this->statements as $statement) {
-            return $this->tryWith($command, $statement);
+            $output = $output->append($this->tryWith($command, $statement));
         }
+        return $output;
     }
 
     private function tryWith($command, $statement)
@@ -36,5 +38,6 @@ class Program
         if ($command->match($statement)) {
             return $command->execute($statement);
         }
+        return new Output();
     }
 }
