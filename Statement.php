@@ -9,13 +9,8 @@ class Statement
         $this->value = $value;
     }
 
-    public function matches(Regexp $regexp)
+    public function snafucate($callback)
     {
-        return $regexp->matches($this->value);
-    }
-
-    public function extract(Regexp $regexp)
-    {
-        return $regexp->extract($this->value);
+        return $callback($this->value);
     }
 }

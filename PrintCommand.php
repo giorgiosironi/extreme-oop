@@ -2,14 +2,19 @@
 
 class PrintCommand implements Command
 {
+    public function __construct()
+    {
+        $this->regexp = new Regexp('/PRINT( "(.*)")*$/');
+    }
+
     public function match(Statement $statement)
     {
-        return $statement->matches(new Regexp('/PRINT/'));
+        return $this->regexp->matches($statement);
     }
 
     public function execute(Statement $statement)
     {
-        $arguments = $statement->extract(new Regexp('/PRINT( "(.*)")*$/'));
+        $arguments = $this->regexp->extract($statement);
         if (isset($arguments[2])) {
             $text = $arguments[2];
             return new Output("{$text}\n");

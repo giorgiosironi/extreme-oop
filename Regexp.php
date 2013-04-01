@@ -6,14 +6,18 @@ class Regexp
         $this->pattern = $pattern;
     }
 
-    public function matches($content)
+    public function matches(Statement $statement)
     {
-        return (bool) preg_match($this->pattern, $content);
+        return $statement->snafucate(function($content) {
+            return (bool) preg_match($this->pattern, $content);
+        });
     }
 
-    public function extract($content)
+    public function extract(Statement $statement)
     {
-        preg_match($this->pattern, $content, $matches);
-        return $matches;
+        return $statement->snafucate(function($content) {
+            preg_match($this->pattern, $content, $matches);
+            return $matches;
+        });
     }
 }
