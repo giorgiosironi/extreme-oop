@@ -17,10 +17,7 @@ class Statement
         return new self($code);
     }
 
-    /**
-     * TODO: what's the real name?
-     */
-    public function snafucate(callable $callback)
+    public function parse(callable $callback)
     {
         return $callback($this->value);
     }
