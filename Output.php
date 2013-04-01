@@ -6,8 +6,15 @@ class Output
 
     public static function multipleLines(/*$line, $line, ...*/)
     {
-        // TODO: ugly to append yet another "\n"
-        return new self(implode("\n", func_get_args()) . "\n");
+        return new self(implode(
+            "",
+            array_map(
+                function($line) {
+                    return $line . "\n";
+                },
+                func_get_args()
+            )
+        ));
     }
 
     public function __construct($value = '')
@@ -15,11 +22,8 @@ class Output
         $this->value = $value;
     }
 
-    /**
-     * TODO: $other?
-     */
-    public function append(Output $other)
+    public function append(Output $additional)
     {
-        return new self($this->value . $other->value);
+        return new self($this->value . $additional->value);
     }
 }
