@@ -5,6 +5,9 @@ class PrintCommandTest extends PHPUnit_Framework_TestCase
     {
         $this->command = new PrintCommand();
         $this->memory = $this->getMock('Memory');
+        $this->memory->expects($this->any())
+            ->method('read')
+            ->will($this->returnArgument(0));
     }
 
     public function testDoesNotMatchFooStatements()
@@ -36,5 +39,15 @@ class PrintCommandTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(new Output("123\n"), $this->command->execute(new Statement('PRINT 123'), $this->memory));
         $this->assertEquals(new Output("-3\n"), $this->command->execute(new Statement('PRINT -3'), $this->memory));
+    }
+
+    public function testReadArgumentValuesFromMemory()
+    {
+        $memory = $this->getMock('Memory');
+        $memory->expects($this->any())
+            ->method('read')
+            ->with(new Expression('A'))
+            ->will($this->returnValue(new Expression(23)));
+        $this->assertEquals(new Output("23\n"), $this->command->execute(new Statement('PRINT A'), $memory));
     }
 }

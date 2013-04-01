@@ -9,3 +9,4 @@ require_once 'PrintCommand.php';
 require_once 'Computer.php';
 require_once 'Program.php';
 require_once 'Output.php';
+require_once 'Expression.php';

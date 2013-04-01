@@ -19,7 +19,7 @@ class PrintCommand implements Command
         $arguments = $this->regexp->extract($statement);
         if (isset($arguments[2])) {
             $text = str_replace('"', '', $arguments[2]);
-            $text = preg_replace('/^A$/', '0', $text);
+            $text = $memory->read(new Expression($text));
             return new Output("{$text}\n");
         }
         return new Output("\n");
