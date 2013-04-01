@@ -12,7 +12,7 @@ class ProgramTest extends PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
         $command->expects($this->any())
             ->method('execute')
-            ->with($statement)
+            ->with($statement, $this->isInstanceOf('Memory'))
             ->will($this->returnValue(new Output('dummy')));
 
         $output = $program->execute($command);

@@ -10,5 +10,5 @@ interface Command
     /**
      * @return Output
      */
-    public function execute(Statement $statement);
+    public function execute(Statement $statement, Memory $memory);
 }

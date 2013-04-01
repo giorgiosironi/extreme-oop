@@ -14,7 +14,7 @@ class PrintCommand implements Command
         return $this->regexp->matches($statement);
     }
 
-    public function execute(Statement $statement)
+    public function execute(Statement $statement, Memory $memory)
     {
         $arguments = $this->regexp->extract($statement);
         if (isset($arguments[2])) {

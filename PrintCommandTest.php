@@ -4,6 +4,7 @@ class PrintCommandTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->command = new PrintCommand();
+        $this->memory = $this->getMock('Memory');
     }
 
     public function testDoesNotMatchFooStatements()
@@ -23,17 +24,17 @@ class PrintCommandTest extends PHPUnit_Framework_TestCase
 
     public function testExecutesEmptyPrintStatement()
     {
-        $this->assertEquals(new Output("\n"), $this->command->execute(new Statement('PRINT')));
+        $this->assertEquals(new Output("\n"), $this->command->execute(new Statement('PRINT'), $this->memory));
     }
 
     public function testExecutesPrintStatementsWithStringArguments()
     {
-        $this->assertEquals(new Output("Hello\n"), $this->command->execute(new Statement('PRINT "Hello"')));
+        $this->assertEquals(new Output("Hello\n"), $this->command->execute(new Statement('PRINT "Hello"'), $this->memory));
     }
 
     public function testExecutesPrintStatementsWithIntegerConstants()
     {
-        $this->assertEquals(new Output("123\n"), $this->command->execute(new Statement('PRINT 123')));
-        $this->assertEquals(new Output("-3\n"), $this->command->execute(new Statement('PRINT -3')));
+        $this->assertEquals(new Output("123\n"), $this->command->execute(new Statement('PRINT 123'), $this->memory));
+        $this->assertEquals(new Output("-3\n"), $this->command->execute(new Statement('PRINT -3'), $this->memory));
     }
 }
