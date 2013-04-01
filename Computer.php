@@ -2,6 +2,8 @@
 
 class Computer
 {
+    private $command;
+
     public function __construct()
     {
         $this->command = new PrintCommand();

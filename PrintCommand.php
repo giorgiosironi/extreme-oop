@@ -2,6 +2,8 @@
 
 class PrintCommand implements Command
 {
+    private $regexp;
+
     public function __construct()
     {
         $this->regexp = new Regexp('/PRINT( (.*))*$/');
