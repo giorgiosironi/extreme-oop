@@ -28,12 +28,12 @@ class Program
     {
         $output = new Output();
         foreach ($this->statements as $statement) {
-            $output = $output->append($this->tryWith($command, $statement));
+            $output = $output->append($this->executeStatement($statement, $command));
         }
         return $output;
     }
 
-    private function tryWith(Command $command, Statement $statement)
+    private function executeStatement(Statement $statement, Command $command)
     {
         if ($command->match($statement)) {
             return $command->execute($statement);
