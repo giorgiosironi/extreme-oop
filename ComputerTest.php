@@ -37,4 +37,10 @@ class ComputerTest extends \PHPUnit_Framework_TestCase
             $this->computer->execute($program)
         );
     }
+
+    public function testSingleLettersAreVariablesThatDefaultToZero()
+    {
+        $program = Program::singleStatement('PRINT A');
+        $this->assertEquals(new Output("0\n"), $this->computer->execute($program));
+    }
 }
