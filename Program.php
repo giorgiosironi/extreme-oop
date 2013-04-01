@@ -2,26 +2,25 @@
 
 class Program
 {
-    private $code;
+    private $statement;
 
-    public function __construct($code)
+    private function __construct($statement)
     {
-        $this->code = $code;
+        $this->statement = $statement;
     }
 
-    public static function singleStatement($code)
+    public static function singleStatement($statement)
     {
-        return new self($code);
+        if (!($statement instanceof Statement)) {
+            $statement = new Statement($statement);
+        }
+        return new self($statement);
     }
 
     public function execute(Command $command)
     {
-        $statement = $this->code;
-        if (!($statement instanceof Statement)) {
-            $statement = new Statement($statement);
-        }
-        if ($command->match($statement)) {
-            return $command->execute($statement);
+        if ($command->match($this->statement)) {
+            return $command->execute($this->statement);
         }
     }
 }
