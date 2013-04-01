@@ -20,7 +20,7 @@ class Statement
     /**
      * TODO: what's the real name?
      */
-    public function snafucate($callback)
+    public function snafucate(callable $callback)
     {
         return $callback($this->value);
     }

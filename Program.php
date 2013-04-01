@@ -33,7 +33,7 @@ class Program
         return $output;
     }
 
-    private function tryWith($command, $statement)
+    private function tryWith(Command $command, Statement $statement)
     {
         if ($command->match($statement)) {
             return $command->execute($statement);
