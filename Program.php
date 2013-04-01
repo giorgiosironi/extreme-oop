@@ -27,9 +27,14 @@ class Program
     public function execute(Command $command)
     {
         foreach ($this->statements as $statement) {
-            if ($command->match($statement)) {
-                return $command->execute($statement);
-            }
+            return $this->tryWith($command, $statement);
+        }
+    }
+
+    private function tryWith($command, $statement)
+    {
+        if ($command->match($statement)) {
+            return $command->execute($statement);
         }
     }
 }
