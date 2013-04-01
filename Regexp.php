@@ -10,4 +10,10 @@ class Regexp
     {
         return (bool) preg_match($this->pattern, $content);
     }
+
+    public function extract($content)
+    {
+        preg_match($this->pattern, $content, $matches);
+        return $matches;
+    }
 }

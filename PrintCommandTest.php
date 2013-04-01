@@ -13,9 +13,10 @@ class PrintCommandTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($command->match(new Statement('PRINT')));
     }
 
-    public function testMatchesPrintStatementWithArguments()
+    public function testMatchesPrintStatementsWithArguments()
     {
-        $this->markTestIncomplete();
+        $command = new PrintCommand();
+        $this->assertTrue($command->match(new Statement('PRINT "Hello"')));
     }
 
     public function testExecutesEmptyPrintStatement()
@@ -24,8 +25,9 @@ class PrintCommandTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(new Output("\n"), $command->execute(new Statement('PRINT')));
     }
 
-    public function testExecutesPrintStatementWithArguments()
+    public function testExecutesPrintStatementsWithArguments()
     {
-        $this->markTestIncomplete();
+        $command = new PrintCommand();
+        $this->assertEquals(new Output("Hello\n"), $command->execute(new Statement('PRINT "Hello"')));
     }
 }
