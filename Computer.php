@@ -2,10 +2,15 @@
 
 class Computer
 {
+    public function __construct()
+    {
+        $this->command = new PrintCommand();
+    }
+
     public function execute(Program $program)
     {
-        if ($program == new Program('PRINT')) {
-            return new Output("\n");
+        if ($output = $program->execute($this->command)) {
+            return $output;
         }
         return new Output('');
     } 
